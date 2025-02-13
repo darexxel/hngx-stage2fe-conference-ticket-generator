@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jeju+Myeongjo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Road+Rage&display=swap');
+@import "tailwindcss";
+
+/* CSS‑first configuration */
+@theme {
+  /* Custom Colors (as before) */
+  --color-custom-dark1: #02191d;
+  --color-custom-dark2: #041e22;
+  --color-custom-dark3: #042127;
+  --color-custom-dark4: #07363e;
+  --color-custom-dark5: #08252b;
+  --color-custom-dark6: #0a0c11;
+  --color-custom-dark7: #0e464f;
+  --color-custom-dark8: #12464e;
+  --color-custom-blue1: #197686;
+  --color-custom-blue2: #23a0b5;
+  --color-custom-gray1: #d9d9d9;
+  --color-custom-gray2: #b3b3b3;
+
+  /* Custom Fonts - NOW CORRECTLY INSIDE @theme! */
+  --font-display: "Roboto", sans-serif;
+  --font-secondary: "JejuMyeongjo", serif;
+  --font-special: "Road Rage", cursive;
+}
+
+
+
+/* Apply custom fonts using CSS rules (as before) */
+.font-secondary-custom {
+  font-family: var(--font-secondary);
+}
+
+.font-special-custom {
+  font-family: var(--font-special);
+}
+
+/* Vertical gradient background (as before) */
+.vertical-gradient-background {
+  background-image: linear-gradient(to bottom, var(--color-custom-dark4), var(--color-custom-dark5));
+}
+
+/* New CSS class for "arch" gradient background */
+.arch-gradient-background {
+  background-image: radial-gradient(
+    ellipse at bottom center,  /* Center the gradient at the bottom center */
+    var(--color-custom-dark3) 15%,   /* Lighter color closer to the center */
+    var(--color-custom-dark1) 20%     /* Darker color further out */
+  );
+}
+
+
+.ticket {
+  position: relative;
+  width: 300px;
+  /* No overflow hidden, so circles can extend outside */
+}
+
+.ticket-inner {
+  position: relative;
+  background: #072c31;
+  /* Remove the native border */
+}
+
+/* Create a border using a pseudo-element on the ticket-inner */
+.ticket-inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid #23a0b5;
+  z-index: 1; /* This will sit behind the corner circles */
+  pointer-events: none;
+}
+
+/* Style the corner circles */
+.corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #23a0b5;
+  border-radius: 50%;
+  background: #041e22; /* Matches the ticket background for a seamless look */
+  z-index: 2; /* Ensure these are above the simulated border */
+}
+
+.corner.top-left {
+  top: -20px;
+  left: -20px;
+}
+.corner.top-right {
+  top: -20px;
+  right: -20px;
+}
+.corner.bottom-left {
+  bottom: -20px;
+  left: -20px;
+}
+.corner.bottom-right {
+  bottom: -20px;
+  right: -20px;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007bff; /* Or your preferred focus color */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Optional: Add a box-shadow */
+}
