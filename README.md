@@ -69,11 +69,9 @@ These instructions will get you a copy of the project up and running on your loc
 1. **Clone the repository:**
 
     ```bash
-    git clone <your_repository_url>
+    git clone git@github.com:darexxel/hngx-stage2fe-conference-ticket-generator.git
     cd hngx-stage2fe-conference-ticket-generator
     ```
-
-    Replace `<your_repository_url>` with the actual URL of your GitHub repository.
 
 2. **Install dependencies:**
 
@@ -97,8 +95,7 @@ This will start the development server, and you can view the application in your
 
 ```bash
 npm run build
-# or
-yarn build
+
 ```
 
 This will create a `dist` folder with the optimized, production-ready build of your application.  You can deploy this `dist` folder to a hosting service like Netlify, Vercel, or GitHub Pages.
@@ -121,7 +118,7 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/hngx-stage2fe-conference-ticket-generator/', // ONLY IF NEEDED
+  base: '/hngx-stage2fe-conference-ticket-generator/', 
 });
 
 ```
