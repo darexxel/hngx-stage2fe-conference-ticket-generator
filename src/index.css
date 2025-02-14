@@ -43,12 +43,10 @@
 
 /* New CSS class for "arch" gradient background */
 .arch-gradient-background {
-  background-image: radial-gradient(
-    ellipse at bottom center,  /* Center the gradient at the bottom center */
-    var(--color-custom-dark3) 15%,   /* Lighter color closer to the center */
-    var(--color-custom-dark1) 20%     /* Darker color further out */
-  );
+  background: linear-gradient(0deg, #02191D, #02191D),
+              radial-gradient(52.52% 32.71% at 50% 97.66%, rgba(36, 160, 181, 0.2) 0%, rgba(36, 160, 181, 0) 100%);
 }
+
 
 
 .ticket {
