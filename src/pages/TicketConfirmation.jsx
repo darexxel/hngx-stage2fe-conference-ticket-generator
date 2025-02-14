@@ -6,7 +6,7 @@ import { toPng } from 'html-to-image';
 const TicketConfirmation = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  // Destructure ALL the data
+  // Destructure all the data from location.state
   const { name, email, specialRequest, profilePhoto, selectedTicket, ticketCount } = location.state || {};
 
   const ticketTypes = [
@@ -15,7 +15,7 @@ const TicketConfirmation = () => {
     { id: 'vvip', name: 'VVIP', price: '$150', access: 'VVIP Access', available: '20/52' },
   ];
 
-  // Helper function to get ticket type name
+  // Helper to get the ticket type name from the ID
   const getTicketTypeName = (ticketId) => {
     const ticket = ticketTypes.find((t) => t.id === ticketId);
     return ticket ? ticket.name : 'Unknown';
@@ -35,7 +35,7 @@ const TicketConfirmation = () => {
     navigate('/');
   };
 
-  // Function to capture and download the ticket as an image using html-to-image
+  // Download ticket image function using html-to-image
   const handleDownloadTicket = async () => {
     const ticketElement = document.getElementById('ticket-card');
     if (ticketElement) {
@@ -78,14 +78,15 @@ const TicketConfirmation = () => {
           <div id="ticket-card" className="self-stretch flex flex-col items-center gap-4 sm:gap-6">
             <div className="self-stretch rounded-3xl flex flex-col items-center">
               <div className="ticket">
-                <div className="ticket-inner w-full sm:w-[300px] relative overflow-hidden bg-[#072c31] rounded-t-3xl">
+                <div className="ticket-inner w-full sm:w-[300px] relative overflow-hidden rounded-t-3xl">
                   {/* Corner cutouts */}
                   <div className="corner top-left"></div>
                   <div className="corner top-right"></div>
                   <div className="corner bottom-left"></div>
                   <div className="corner bottom-right"></div>
-                  <div className="absolute inset-0 bg-[#031d21]/10"></div>
-                  <div className="mx-2 sm:mx-4 py-2 my-2 sm:my-4 border-[#23a0b5] border rounded-2xl sm:rounded-3xl flex flex-col items-center gap-3 sm:gap-5">
+                  {/* Overlay (using a semi-transparent version of dark2) */}
+                  <div className="absolute inset-0 bg-[rgba(4,30,34,0.1)]"></div>
+                  <div className="mx-2 sm:mx-4 py-2 my-2 sm:my-4 border border-custom-blue2 rounded-2xl sm:rounded-3xl flex flex-col items-center gap-3 sm:gap-5">
                     <div className="flex flex-col justify-start items-center">
                       <div className="self-stretch text-center text-white text-[34px] font-normal font-special-custom leading-[34px]">
                         Techember Fest "25
@@ -104,9 +105,9 @@ const TicketConfirmation = () => {
                       src={profilePhoto}
                       alt="User Avatar"
                     />
-                    <div className="mx-2 p-1 bg-[#07333c] rounded-lg border border-[#123d43] flex flex-col justify-center items-center">
-                      <div className="self-stretch border-b border-[#12464e] flex justify-start items-center gap-2">
-                        <div className="grow shrink basis-0 p-1 border-r border-[#12464e] flex flex-col justify-center items-start gap-1">
+                    <div className="mx-2 p-1 bg-custom-dark4 rounded-lg border border-custom-dark8 flex flex-col justify-center items-center">
+                      <div className="self-stretch border-b border-custom-dark8 flex justify-start items-center gap-2">
+                        <div className="grow shrink basis-0 p-1 border-r border-custom-dark8 flex flex-col justify-center items-start gap-1">
                           <div className="opacity-30 text-white text-[10px] font-normal font-display leading-[15px]">
                             Enter your name
                           </div>
@@ -119,8 +120,8 @@ const TicketConfirmation = () => {
                           <div className="text-white text-xs font-bold font-display leading-[18px]">{email}</div>
                         </div>
                       </div>
-                      <div className="self-stretch border-b border-[#12464e] flex justify-start items-center gap-2">
-                        <div className="grow shrink basis-0 p-1 border-r border-[#12464e] flex flex-col justify-center items-start gap-1">
+                      <div className="self-stretch border-b border-custom-dark8 flex justify-start items-center gap-2">
+                        <div className="grow shrink basis-0 p-1 border-r border-custom-dark8 flex flex-col justify-center items-start gap-1">
                           <div className="opacity-30 text-white text-[10px] font-normal font-display leading-[15px]">
                             Ticket Type:
                           </div>
@@ -148,15 +149,17 @@ const TicketConfirmation = () => {
 
               {/* Barcode */}
               <div className="ticket">
-                <div className="ticket-inner w-full sm:w-[300px] h-[80px] sm:h-[120px] relative overflow-hidden bg-[#072c31] rounded-b-3xl">
+                <div className="ticket-inner w-full sm:w-[300px] h-[80px] sm:h-[120px] relative overflow-hidden rounded-b-3xl">
                   <div className="corner top-left"></div>
                   <div className="corner top-right"></div>
                   <div className="corner bottom-left"></div>
                   <div className="corner bottom-right"></div>
                   <div className="flex justify-between items-center w-full h-full p-2 sm:p-8">
-                    {[3, 3, 10, 5, 3, 5, 3, 7, 4, 5, 3, 3, 3, 4, 3, 8, 3, 6, 6, 7, 3, 6, 5, 3, 3].map((width, index) => (
-                      <div key={index} className="bg-white h-full" style={{ width: `${width}px` }}></div>
-                    ))}
+                    {[3, 3, 10, 5, 3, 5, 3, 7, 4, 5, 3, 3, 3, 4, 3, 8, 3, 6, 6, 7, 3, 6, 5, 3, 3].map(
+                      (width, index) => (
+                        <div key={index} className="bg-white h-full" style={{ width: `${width}px` }}></div>
+                      )
+                    )}
                   </div>
                   <div className="absolute bottom-1 sm:bottom-3 left-2 sm:left-4 text-white text-[8px] sm:text-xs font-normal font-display">
                     1

@@ -7,8 +7,8 @@ const AttendeeDetails = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [specialRequest, setSpecialRequest] = useState('');
-  const [profilePhoto, setProfilePhoto] = useState(null); // For preview
-  const [imageUrl, setImageUrl] = useState(''); // For Cloudinary URL
+  const [profilePhoto, setProfilePhoto] = useState(null)
+  const [imageUrl, setImageUrl] = useState(''); 
   const [errors, setErrors] = useState({});
   const [uploadLoading, setUploadLoading] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
@@ -169,8 +169,7 @@ const AttendeeDetails = () => {
         name,
         email,
         specialRequest,
-        profilePhoto: imageUrl, // Send imageUrl
-        selectedTicket,
+        profilePhoto: imageUrl, 
         ticketCount,
       },
     });
